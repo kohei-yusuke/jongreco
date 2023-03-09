@@ -105,3 +105,26 @@ a {
     color-scheme: dark;
   }
 }
+
+/*index*/
+.title-wrapper{
+  background-color: #008080;
+}
+
+.title{
+  color:white;
+  text-align:center;
+}
+
+.subtitle{
+  color:white;
+  text-align: center;
+}
+
+.about-title{
+  color:blue;
+}
+
+.params{
+  color:green;
+}
