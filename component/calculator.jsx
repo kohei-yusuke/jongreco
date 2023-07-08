@@ -10,7 +10,7 @@ const Calculator = () =>{
 
     const [data, setData] = useState();
     ///デプロイ後に変える
-    const root_url= "http://127.0.0.1:8000/"
+    const root_url= "https://jongreco-backend.vercel.app/"
     const [url, setUrl] = useState(root_url);
 
     const [han,setHan] = useState();
