@@ -39,9 +39,10 @@ export const StartConfig = ()=>{
 
     return(
         <div className="container bg-success p-3">
-            <div className="text-center">
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#defaultModal">設定をして対局を開始する</button>
-            </div>
+            <div className="text-center row">
+                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#defaultModal">リーグモード(設定へ)</button>
+                <button type="button" className="btn btn-light" onClick={(e)=>{router.push("/scoreCalculator")}}>点数計算モード</button>
+                </div>
             <div className="modal" id="defaultModal" tabindex="-1" role="dialog" aria-hidden="true" >
                     <div className="modal-dialog" role="document" >
                         <div className="modal-content">

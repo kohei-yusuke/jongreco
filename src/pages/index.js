@@ -4,6 +4,7 @@ import Header from 'component/header'
 import Title from 'component/title'
 import IndexDescription from 'component/indexDescription'
 import StartConfig from 'component/startConfig'
+import Api from 'component/api'
 import Footer from 'component/footer'
 import { Inter } from '@next/font/google'
 
