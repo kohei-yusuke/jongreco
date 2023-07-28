@@ -3,6 +3,7 @@ import {useRouter} from 'next/router'
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
 
+
 const MatchResult = () =>{
     const router = useRouter();
    
@@ -172,7 +173,7 @@ const MatchResult = () =>{
                     type="submit"
                     value="削除"
                     key={i}
-                    onClick={()=>DeleteScore()}
+                    onClick={(e)=>DeleteScore(e)}
                     />
                     </td>
                 </tr>
@@ -223,40 +224,38 @@ const MatchResult = () =>{
         return(sums);
     }
     ///全対局の順位を取得
-    const GetOrder = () =>{
-        const ResultSum = (i) =>{
-            return(resultArray[i].scores.reduce((sum,element)=> {return(sum + element);},0))
-        }
+    const GetOrder = () => {
+      const ResultSum = (i) => {
+        return resultArray[i].scores.reduce((sum, element) => sum + element, 0);
+      };
+    
+      const sums = [
+        { user: 0, sum: ResultSum(0) },
+        { user: 1, sum: ResultSum(1) },
+        { user: 2, sum: ResultSum(2) },
+        { user: 3, sum: ResultSum(3) }
+      ];
+    
+      // sumsを合計得点の降順にソート
+      const sortedSums = sums.sort((a, b) => b.sum - a.sum);
+      
+      // 新しい配列sumsAndOrderを作成し、orderプロパティを追加する
+      const sumsAndOrder = sortedSums.map(( entry, index)=>{
+        return {
+          ...entry,
+          order: index+1
+        };
+      });
 
-        const orders =[]; ///[3,2,1,4]だったらuser3が1位、...,user4が4位であることを意味する
-        const ordersJSX = [];
+      sumsAndOrder.sort((a,b)=> a.user - b.user);//昇順0，1，2，3...
 
-        const sums = [
-            {user:0, sum:ResultSum(0)},
-            {user:1, sum:ResultSum(1)},
-            {user:2, sum:ResultSum(2)},
-            {user:3, sum:ResultSum(3)}
-        ]
-
-        sums.sort((a,b)=> b.sum - a.sum);
-        ///sums[i].userがi+1位になっている
-
-        for(let i=0;i<4; i++){
-            for(let j=0; j<4; j++){
-                if(sums[i].user === j){
-                    orders.push(sums[i].user)
-                }
-            }
-        }
-
-        for(let k=0; k<4; k++){
-            ordersJSX.push(
-                <td>{orders[k]+1}</td>
-            );
-        }
-        
-        return(ordersJSX);
-    }
+      const ordersJSX = sumsAndOrder.map((entry, index) => (
+        <td key={index}>{entry.order}</td>
+      ));
+    
+      return ordersJSX;
+    };
+    
 
     ///全試合データを表示する
     const AllMatchResultTable = () =>{
