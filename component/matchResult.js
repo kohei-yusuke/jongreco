@@ -134,8 +134,13 @@ const MatchResult = () =>{
         }
         if(!isCorrect){
             return(
-                <div className="alert alert-danger py-1" role="alert">合計が正しくありません</div>
+                <div className="row">
+                  <div className="col alert alert-danger py-1 text-nowrap" role="alert">合計が正しくありません</div>
+                  <div className="col py-1 text-center text-nowrap">{ScoresSum}/{correctSumScore}</div>
+                </div>
                 )
+        }else{
+          return (<div className="alert alert-success py-1" role="alert">CORRECT!</div>);
         }
     }
 
@@ -422,10 +427,6 @@ const MatchResult = () =>{
         )
     }
 
-    ///indexへのボタン
-    const ToIndex = () =>{
-
-    }
 
     ///MatchResultのreturn
     return(
