@@ -27,17 +27,22 @@ const Calculator = () =>{
     
 
     ///apiから点数データを取得
-    const GetData =  () =>{
+    const getData =  () =>{
         console.log("new_url:"+new_url);
         axios.get(new_url).then((res)=>{
             setData(res.data);
             console.log('GetData complete')
         });
-        if(data !== undefined){
-        set_is_table_active(true);
-        console.log(is_table_active);}
     };
 
+    // useEffectを使って"data"状態の変更を監視する
+    useEffect(() => {
+        // dataがundefinedでない場合にのみis_table_activeをtrueに設定する
+        if (data !== undefined) {
+            set_is_table_active(true);
+            console.log(is_table_active);
+        }
+    }, [data]);
 
     const input_hu_box = () =>{
         if(is_pinfu){
@@ -191,7 +196,7 @@ const Calculator = () =>{
             <button 
             className="btn btn-success"
             type= "submit"
-            onClick={GetData}
+            onClick={getData}
             >計算
             </button>
         )
