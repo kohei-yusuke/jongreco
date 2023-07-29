@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
@@ -6,14 +6,53 @@ import { Line } from "react-chartjs-2";
 
 const MatchResult = () =>{
     const router = useRouter();
-   
+    const [queryParams, setQueryParams] = useState(router.query);
+
+    useEffect(()=>{
+      setQueryParams(router.query);
+    }, [router.query]);
+
     const [startScore, setStartScore] = useState(router.query.startScore);
     const [baseScore, setBaseScore] = useState(router.query.baseScore);
     const [firstBonus, setFirstBonus] = useState(router.query.firstBonus); 
     const [secondBonus, setSecondBonus] = useState(router.query.secondBonus);
 
-    const startScoreToNumber = Number(startScore);
-    const baseScoreToNumber = Number(baseScore);
+    //クエリパラメータの更新のためsetterの修正
+    const handleChangeStartScore = (value) => {
+      setStartScore(value);
+      router.push({
+        pathname: router.pathname,
+        query: { ...queryParams, startScore: value },
+      });
+    };
+    
+    const handleChangeBaseScore = (value) => {
+      setBaseScore(value);
+      router.push({
+        pathname: router.pathname,
+        query: { ...queryParams, startScore: value },
+      });
+    };
+    
+    const handleChangeFirstBonus = (value) => {
+      setFirstBonus(value);
+      router.push({
+        pathname: router.pathname,
+        query: { ...queryParams, startScore: value },
+      });
+    };
+    
+    const handleChangeSecondBonus = (value) => {
+      setSecondBonus(value);
+      router.push({
+        pathname: router.pathname,
+        query: { ...queryParams, startScore: value },
+      });
+    };
+       
+    
+    const startScoreToNumber = Number(queryParams.startScore);
+    const baseScoreToNumber = Number(queryParams.baseScore);
     
 
     const user0 = router.query.user0;
@@ -72,13 +111,13 @@ const MatchResult = () =>{
         order = getIndexByOrder(userIndex);
 
         if(order === 0){
-            return (Number(firstBonus));
+            return (Number(queryParams.firstBonus));
         }else if(order === 1){
-            return (Number(secondBonus));
+            return (Number(queryParams.secondBonus));
         }else if(order === 2){
-            return (Number(-1*secondBonus));
+            return (Number(-1*queryParams.secondBonus));
         }else if(order === 3){
-            return (Number(-1* firstBonus));
+            return (Number(-1* queryParams.firstBonus));
         }
     }
     
