@@ -431,128 +431,110 @@ const MatchResult = () =>{
     ///MatchResultのreturn
     return(
         <>  
-            <div className="container mb-3 p-3 bg-light">
-                <ScoreInputMessage/>
-                <div className='input-group' id="scoreInputGroup">
-                    <div className="input-group">
-                        <span className="input-group-text">{user0}</span>
-                        <input 
-                        className = "form-control text-end"
-                        value={ScoreUser0}
-                        key = "0"
-                        onChange = {e => setScoreUser0(e.target.value)}
-                        type = "number"
-                        />
-                        <span className="input-group-text">00</span>
+            <div className="container mb-4">
+                <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title mb-4">第{matchCount}局の得点</h5>
+                        <div className="table-responsive">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>名前</th>
+                                        <th>{user0}</th>
+                                        <th>{user1}</th>
+                                        <th>{user2}</th>
+                                        <th>{user3}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>素点</th>
+                                        <td>{times_100(ScoreUser0)}</td>
+                                        <td>{times_100(ScoreUser1)}</td>
+                                        <td>{times_100(ScoreUser2)}</td>
+                                        <td>{times_100(ScoreUser3)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ウマ</th>
+                                        <td>{orderBonusGet(0)}</td>
+                                        <td>{orderBonusGet(1)}</td>
+                                        <td>{orderBonusGet(2)}</td>
+                                        <td>{orderBonusGet(3)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>得点</th>
+                                        <td>{matchResult(0)}</td>
+                                        <td>{matchResult(1)}</td>
+                                        <td>{matchResult(2)}</td>
+                                        <td>{matchResult(3)}</td>
+                                    </tr>
+                                    <tr className="table-success">
+                                        <th>順位</th>
+                                        <td>{getIndexByOrder(0)+1}</td>
+                                        <td>{getIndexByOrder(1)+1}</td>
+                                        <td>{getIndexByOrder(2)+1}</td>
+                                        <td>{getIndexByOrder(3)+1}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div className="input-group">
-                        <span className="input-group-text">{user1}</span>
-                        <input 
-                        className = "form-control text-end"
-                        value={ScoreUser1}
-                        key = "1"
-                        onChange = {e => setScoreUser1(e.target.value)}
-                        type = "number"
-                        />
-                        <span className="input-group-text">00</span>
-                    </div>
-
-                    <div className="input-group">
-                        <span className="input-group-text">{user2}</span>
-                        <input 
-                        className = "form-control text-end"
-                        value={ScoreUser2}
-                        key = "2"
-                        onChange = {e => setScoreUser2(e.target.value)}
-                        type = "number"
-                        />
-                        <span className="input-group-text">00</span>
-                    </div>
-
-                    <div className="input-group">
-                        <span className="input-group-text">{user3}</span>
-                        <input 
-                        className = "form-control text-end"
-                        value={ScoreUser3}
-                        key = "3"
-                        onChange = {e => setScoreUser3(e.target.value)}
-                        type = "number"
-                        />
-                        <span className="input-group-text">00</span>
-                    </div>
-                    {checkTotalScore()}
                 </div>
-                
-            </div>
-            <div className="container mb-3 bg-light">
-                <div className="table-responsive  text-nowrap text-center">
-                    <MatchNumberNow/>
-                    <table className="table table-light border border-2 border-dark">
-                        <thead>
-                            <tr className="table-info">
-                                <th scope="col">名前</th>
-                                <th scope="col">{user0}</th>
-                                <th scope="col">{user1}</th>
-                                <th scope="col">{user2}</th>
-                                <th scope="col">{user3}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <th scope="row">素点</th>
-                                <td>{times_100(ScoreUser0)}</td>
-                                <td>{times_100(ScoreUser1)}</td>
-                                <td>{times_100(ScoreUser2)}</td>
-                                <td>{times_100(ScoreUser3)}</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr>
-                                <th scope="row">ウマ</th>
-                                <td>{orderBonusGet(0)}</td>
-                                <td>{orderBonusGet(1)}</td>
-                                <td>{orderBonusGet(2)}</td>
-                                <td>{orderBonusGet(3)}</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr>
-                                <th scope="row">得点</th>
-                                <td>{matchResult(0)}</td>
-                                <td>{matchResult(1)}</td>
-                                <td>{matchResult(2)}</td>
-                                <td>{matchResult(3)}</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr className="table-success">
-                                <th scope="row">順位</th>
-                                <td>{getIndexByOrder(0)+1}</td>
-                                <td>{getIndexByOrder(1)+1}</td>
-                                <td>{getIndexByOrder(2)+1}</td>
-                                <td>{getIndexByOrder(3)+1}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>               
             </div>
 
-            <div className="container p-3 mb-3 bg-light">
-                <input
-                className = "form-control fs-6 fw-bold"
-                type = "submit" 
-                value={submitMessage()}
-                onClick = {()=>AddResult()}
-                />
+            <div className="container mb-4">
+                <button
+                    className="btn btn-primary w-100"
+                    onClick={() => AddResult()}
+                >
+                    {submitMessage()}
+                </button>
             </div>
 
-            <AllMatchResultTable/>
-            <ResultGraph/>
+            <div className="container mb-4">
+                <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title mb-4">全対局の結果</h5>
+                        <div className="table-responsive">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>名前</th>
+                                        <th>{user0}</th>
+                                        <th>{user1}</th>
+                                        <th>{user2}</th>
+                                        <th>{user3}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <ResultTableBody />
+                                <tbody>
+                                    <tr>
+                                        <th>合計</th>
+                                        <ResultSums />
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr className="table-success">
+                                        <th>順位</th>
+                                        <GetOrder />
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container mb-4">
+                <div className="card">
+                    <div className="card-body">
+                        <ResultGraph />
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

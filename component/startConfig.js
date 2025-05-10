@@ -37,21 +37,42 @@ export const StartConfig = ()=>{
         });
     }
 
-    return(
-        <div className="container bg-success p-3">
-            <div className="text-center row">
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#defaultModal">リーグモード(設定へ)</button>
-                <button type="button" className="btn btn-light" onClick={(e)=>{router.push("/scoreCalculator")}}>点数計算モード</button>
-                </div>
-            <div className="modal" id="defaultModal" tabindex="-1" role="dialog" aria-hidden="true" >
-                    <div className="modal-dialog" role="document" >
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="startConfig">Setting</h5>                       
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+    return (
+        <div className="container">
+            <div className="row justify-content-center g-4">
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body text-center">
+                            <h5 className="card-title mb-4">ゲームモード選択</h5>
+                            <div className="d-grid gap-3">
+                                <button 
+                                    type="button" 
+                                    className="btn btn-primary" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#defaultModal"
+                                >
+                                    リーグモード
+                                </button>
+                                <button 
+                                    type="button" 
+                                    className="btn btn-outline-primary" 
+                                    onClick={(e) => {router.push("/scoreCalculator")}}
+                                >
+                                    点数計算モード
+                                </button>
                             </div>
-                        
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div className="modal fade" id="defaultModal" tabIndex="-1" role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">設定</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                        </div>
                         <div className="modal-body">
                             <>
                                 <form>
